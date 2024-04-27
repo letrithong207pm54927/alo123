@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show All Motorbikes</title>
+  <style>
+    /* CSS để căn chỉnh dữ liệu trong bảng */
+    #motorbikeTable {
+      display: none; /* Ẩn bảng ban đầu */
+      width: 100%; /* Chiều rộng của bảng */
+      border-collapse: collapse; /* Gộp các đường viền của các ô trong bảng */
+    }
+
+    #motorbikeTable th, #motorbikeTable td {
+      border: 1px solid black; /* Đường viền cho các ô trong bảng */
+      padding: 8px; /* Khoảng cách giữa nội dung và đường viền của ô */
+      text-align: center; /* Căn giữa văn bản */
+    }
+
+    #motorbikeTable th {
+      background-color: #f2f2f2; /* Màu nền cho các ô tiêu đề */
+    }
+
+    #motorbikeTable img {
+      width: 100px; /* Kích thước cố định cho tất cả các hình ảnh */
+      height: auto; /* Giữ tỷ lệ khung hình */
+      vertical-align: middle; /* Căn giữa theo chiều dọc */
+    }
+
+    /* CSS cho form */
+    #filterForm {
+      margin-top: 20px;
+    }
+
+    #filterForm input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Motorbikes</h1>
+
+  <!-- Form để nhập các điều kiện lọc -->
+  <form id="filterForm">
+    <label for="minCost">Min Cost:</label>
+    <input type="number" id="minCost" name="minCost">
+    <label for="maxCost">Max Cost:</label>
+    <input type="number" id="maxCost" name="maxCost">
+    <label for="brand">Brand:</label>
+    <input type="text" id="brand" name="brand">
+    <label for="model">Model:</label>
+    <input type="text" id="model" name="model">
+    <label for="engine">Engine:</label>
+    <input type="text" id="engine" name="engine">
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year">
+    <button type="submit" id="searchBtn">Search</button>
+  </form>
+
+  <table id="motorbikeTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Engine Displacement</th>
+        <th>Cost</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody id="motorbikeList"></tbody>
+  </table>
+  <script>
+    // Lắng nghe sự kiện submit của form
+    document.getElementById('filterForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+      // Lấy dữ liệu từ các trường input trong form
+      const minCost = document.getElementById('minCost').value;
+      const maxCost = document.getElementById('maxCost').value;
+      const brand = document.getElementById('brand').value;
+      const model = document.getElementById('model').value;
+      const engine = document.getElementById('engine').value;
+      const year = document.getElementById('year').value;
+
+      // Tạo URL với các tham số truy vấn
+      const url = `/api/search?minCost=${minCost}&maxCost=${maxCost}&brand=${brand}&model=${model}&engineDisplacement=${engine}&year=${year}`;
+
+      try {
+        // Gửi yêu cầu GET tới máy chủ và đợi phản hồi
+        const response = await fetch(url);
+        const data = await response.json();
+
+        // Xử lý dữ liệu trả về từ server và hiển thị kết quả
+        displayMotorbikes(data);
+      } catch (error) {
+        // Xử lý lỗi nếu có
+        console.error('Error:', error);
+      }
+    });
+
+    // Hàm hiển thị kết quả lên trang web
+    function displayMotorbikes(data) {
+      const motorbikeList = document.getElementById('motorbikeList');
+      motorbikeList.innerHTML = ''; // Xóa nội dung hiện tại của bảng
+
+      // Lặp qua mảng dữ liệu và thêm mỗi mục vào bảng
+      data.forEach(motorbike => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${motorbike.id}</td>
+          <td>${motorbike.brand}</td>
+          <td>${motorbike.model}</td>
+          <td>${motorbike.year}</td>
+          <td>${motorbike.engineDisplacement}</td>
+          <td>${motorbike.cost}</td>
+          <td><img src="${motorbike.image}" alt="${motorbike.brand} ${motorbike.model}"></td>
+        `;
+        motorbikeList.appendChild(row);
+      });
+
+      // Hiển thị bảng sau khi nhận dữ liệu
+      document.getElementById('motorbikeTable').style.display = 'table';
+    }
+
+  </script>
+</body>
+</html>

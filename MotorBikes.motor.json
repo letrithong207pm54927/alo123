@@ -1,0 +1,156 @@
+[{
+  "_id": {
+    "$oid": "662a280d298df381d20466cb"
+  },
+  "id": "mtsb120001",
+  "brand": "Honda",
+  "model": "CBR1000RR",
+  "year": 2023,
+  "engineDisplacement": "1000cc",
+  "color": "Red",
+  "image": "https://product.hstatic.net/1000404601/product/3r_sp_e93056831ee047be88aeb060ecfd4498.png",
+  "cost": 15000
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466cc"
+  },
+  "id": "mtsb120002",
+  "brand": "Yamaha",
+  "model": "YZF-R1",
+  "year": 2022,
+  "engineDisplacement": "1000cc",
+  "color": "Blue",
+  "image": "https://imgwebikenet-8743.kxcdn.com/moto_img/cg/9/8906/L_4a70fec8f3e77bf58f68efe146.jpg",
+  "cost": 16000
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466cd"
+  },
+  "id": "mtsb120003",
+  "brand": "Kawasaki",
+  "model": "Ninja ZX-10R",
+  "year": 2024,
+  "engineDisplacement": "998cc",
+  "color": "Green",
+  "image": "https://image.bikebros.co.jp/bike_img/1/16620/1_l.jpg",
+  "cost": 15500
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466ce"
+  },
+  "id": "mtsb120004",
+  "brand": "Suzuki",
+  "model": "GSX-R1000",
+  "year": 2021,
+  "engineDisplacement": "999cc",
+  "color": "Yellow",
+  "image": "https://imgwebikevn-8743.kxcdn.com/WEmt34WYwm5dcdIEjz5uqCR12Ik=/master/series/159_gsx-r1000-abs.jpg",
+  "cost": 14500
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466cf"
+  },
+  "id": "mtsb120005",
+  "brand": "Ducati",
+  "model": "Panigale V4",
+  "year": 2023,
+  "engineDisplacement": "1103cc",
+  "color": "Black",
+  "image": "https://imgwebikevn-8743.kxcdn.com/BsBcZKFne1j2_v4O1Nqz6vxKcws=/master/series/1344_panigale-v4.jpg",
+  "cost": 17000
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d0"
+  },
+  "id": "mtsb120006",
+  "brand": "BMW",
+  "model": "S1000RR",
+  "year": 2023,
+  "engineDisplacement": "999cc",
+  "color": "White",
+  "image": "https://product.hstatic.net/200000726533/product/e-bmw-s1000rr-2020-112-huayi-blue__1__27650991336b437d8d1ad133e6e6f5bc_5426d7d8f0d8411bbe544b6107315fb9_grande.jpg",
+  "cost": 17500
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d1"
+  },
+  "id": "mtsb120007",
+  "brand": "Triumph",
+  "model": "Street Triple RS",
+  "year": 2024,
+  "engineDisplacement": "765cc",
+  "color": "Silver",
+  "image": "https://triumph-saigon.com/wp-content/uploads/2021/10/street-triple-765-rs-step-carousel-2-1410x793-1.jpg",
+  "cost": 14000
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d2"
+  },
+  "id": "mtsb120008",
+  "brand": "Aprilia",
+  "model": "RSV4",
+  "year": 2022,
+  "engineDisplacement": "1077cc",
+  "color": "Red",
+  "image": "https://product.hstatic.net/200000449245/product/rsv4_nera_34dx_e07ae224cfb84b35be7941d039314490_master.jpg",
+  "cost": 16500
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d3"
+  },
+  "id": "mtsb120009",
+  "brand": "Harley-Davidson",
+  "model": "Sportster Iron 883",
+  "year": 2023,
+  "engineDisplacement": "883cc",
+  "color": "Black",
+  "image": "https://truongdaotaolaixehcm.com/wp-content/uploads/2018/03/Danh-gia-Harley-Davidson-Iron-01-1024x813.jpg",
+  "cost": 13000
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d4"
+  },
+  "id": "mtsb120010",
+  "brand": "KTM",
+  "model": "1290 Super Duke R",
+  "year": 2024,
+  "engineDisplacement": "1301cc",
+  "color": "Orange",
+  "image": "https://ktmvietnam.vn/wp-content/uploads/2022/02/PHO_BIKE_PERS_REVO_1290-sdr-21-or-revo_SALL_AEPI_V1.jpg",
+  "cost": 18000
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d5"
+  },
+  "id": "mtsb120011",
+  "brand": "MV Agusta",
+  "model": "F4 RR",
+  "year": 2022,
+  "engineDisplacement": "998cc",
+  "color": "Grey",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyJLfYhrGwISlMWtqZd38vDqObCEaup3TBng&usqp=CAU",
+  "cost": 18500
+},
+{
+  "_id": {
+    "$oid": "662a280d298df381d20466d6"
+  },
+  "id": "mtsb120012",
+  "brand": "Bimota",
+  "model": "Tesi H2",
+  "year": 2023,
+  "engineDisplacement": "998cc",
+  "color": "Yellow",
+  "image": "https://s3.cloud.cmctelecom.vn/tinhte2/2020/09/5163677_bimota-tesi-h2-2.jpg",
+  "cost": 19000
+}]

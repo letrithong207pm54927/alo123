@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="myForm">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id">
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand">
+            </div>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model">
+            </div>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year">
+            </div>
+            <div class="form-group">
+                <label for="engineDisplacement">Engine Displacement:</label>
+                <input type="text" id="engineDisplacement" name="engineDisplacement">
+            </div>
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color">
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="text" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <button type="button"  onclick="addCar()">Add</button>
+                <button type="button"  onclick="submitOneCar()">SubmitOne</button>
+                <button type="button"  onclick="submitManyCars()">SubmitMany</button>
+            </div>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        var cars = [];
+
+        function addCar() {
+            var id = document.getElementById('id').value;
+            var brand = document.getElementById('brand').value;
+            var model = document.getElementById('model').value;
+            var year = document.getElementById('year').value;
+            var engineDisplacement = document.getElementById('engineDisplacement').value;
+            var color = document.getElementById('color').value;
+            var image = document.getElementById('image').value;
+
+            var car = {
+                id: id,
+                brand: brand,
+                model: model,
+                year: year,
+                engineDisplacement: engineDisplacement,
+                color: color,
+                image: image
+            };
+
+            cars.push(car);
+
+            outputMessage(`The car [ID: ${id}, Brand: ${brand}, Model: ${model}, Year: ${year}, Engine Displacement: ${engineDisplacement}, Color: ${color}, Image: ${image}] added`, 'red');
+        }
+
+        function outputMessage(message, color) {
+            var messageElement = document.getElementById('message');
+            messageElement.textContent = message;
+            messageElement.style.color = color;
+        }
+
+        function submitOneCar() {
+            if (cars.length === 1) {
+                fetch('/createOne', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(cars[0])
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from server:', data);
+                    alert(data.message);
+                    resetForm();
+                })
+                .catch(err => {
+                    console.error('Error', err);
+                });
+            } else {
+                alert('Please add only one car to submit.');
+            }
+        }
+        
+        function submitManyCars() {
+            if (cars.length > 1) {
+                fetch('/createMany', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(cars)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from server:', data);
+                    alert(data.message);
+                    resetForm();
+                })
+                .catch(err => {
+                    console.error('Error', err);
+                });
+            } else {
+                alert('Please add more than one car to submit many cars.');
+            }
+        }
+        function resetForm() {
+            document.getElementById('myForm').reset();
+            document.getElementById('message').textContent = '';
+            setFocusID();
+            cars = [];
+        }
+
+        function setFocusID() {
+            document.getElementById('id').focus();
+        }
+    </script>
+</body>
+</html>
+
+

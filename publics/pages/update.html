@@ -1,0 +1,372 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Car</title>
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id">
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand">
+            </div>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model">
+            </div>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year">
+            </div>
+            <div class="form-group">
+                <label for="engineDisplacement">Engine Displacement:</label>
+                <input type="text" id="engineDisplacement" name="engineDisplacement">
+            </div>
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color">
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="text" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="findCar()">Find</button>
+                <button type="button" onclick="updateCar()">Update</button>
+            </div>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function findCar() {
+            var id = document.getElementById('id').value;
+            
+            fetch(`/find?id=${id}`)
+            .then(resonse => resonse.json())
+            .then(data => {
+                if(data.car){
+                    var car = data.car
+                    document.getElementById('brand').value = car.brand;
+            document.getElementById('model').value = car.model;
+            document.getElementById('year').value = car.year;
+            document.getElementById('engineDisplacement').value = car.engineDisplacement;
+            document.getElementById('color').value = car.color;
+            document.getElementById('image').value = car.image;
+
+            outputMessage(`Car with ID ${id} found. You can now update its information.`, 'blue');
+                }else{
+                    outputMessage(`Car with ID ${id} not found`)
+                }
+            })
+            .catch(err =>{
+                console.error('Erorr',err)
+            })
+        }
+
+        function updateCar() {
+            var id = document.getElementById('id').value;
+            var brand = document.getElementById('brand').value;
+            var model = document.getElementById('model').value;
+            var year = document.getElementById('year').value;
+            var engineDisplacement = document.getElementById('engineDisplacement').value;
+            var color = document.getElementById('color').value;
+            var image = document.getElementById('image').value;
+        
+            var updatedCar = {
+                id: id,
+                brand: brand,
+                model: model,
+                year: year,
+                engineDisplacement: engineDisplacement,
+                color: color,
+                image: image
+            };
+        
+            fetch('/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedCar)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from server:', data);
+                alert(data.message);
+            })
+            .catch(err => {
+                console.error('Error', err);
+            });
+        }
+        
+
+        function outputMessage(message, color) {
+            var messageElement = document.getElementById('message');
+            messageElement.textContent = message;
+            messageElement.style.color = color;
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Car</title>
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" placeholder="Vui lòng nhập ID">
+                <button onclick = "findCar()">Find</button>
+            </div>
+            <div id="carInfo" style="display: none;">
+                <div class="form-group">
+                    <label for="brand">Brand:</label>
+                    <input type="text" id="brand" name="brand" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <input type="text" id="model" name="model" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <input type="text" id="year" name="year" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="engineDisplacement">Engine Displacement:</label>
+                    <input type="text" id="engineDisplacement" name="engineDisplacement" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <input type="text" id="color" name="color" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="text" id="image" name="image" disabled>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="updateCar()">Update</button>
+                </div>
+            </div>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function findCar() {
+            var id = document.getElementById('id').value;
+            
+            fetch(`/find?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.car){
+                    var car = data.car;
+                    document.getElementById('brand').value = car.brand;
+                    document.getElementById('model').value = car.model;
+                    document.getElementById('year').value = car.year;
+                    document.getElementById('engineDisplacement').value = car.engineDisplacement;
+                    document.getElementById('color').value = car.color;
+                    document.getElementById('image').value = car.image;
+
+                    // Show car information
+                    document.getElementById('carInfo').style.display = 'block';
+
+                    outputMessage(`Car with ID ${id} found. You can now update its information.`, 'blue');
+                } else {
+                    outputMessage(`Car with ID ${id} not found`, 'red');
+                    // Hide car information if not found
+                    document.getElementById('carInfo').style.display = 'none';
+                }
+            })
+            .catch(err => {
+                console.error('Error', err);
+            });
+        }
+
+        function updateCar() {
+            var id = document.getElementById('id').value;
+            var brand = document.getElementById('brand').value;
+            var model = document.getElementById('model').value;
+            var year = document.getElementById('year').value;
+            var engineDisplacement = document.getElementById('engineDisplacement').value;
+            var color = document.getElementById('color').value;
+            var image = document.getElementById('image').value;
+        
+            var updatedCar = {
+                id: id,
+                brand: brand,
+                model: model,
+                year: year,
+                engineDisplacement: engineDisplacement,
+                color: color,
+                image: image
+            };
+        
+            fetch('/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedCar)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from server:', data);
+                alert(data.message);
+            })
+            .catch(err => {
+                console.error('Error', err);
+            });
+        }
+
+        function outputMessage(message, color) {
+            var messageElement = document.getElementById('message');
+            messageElement.textContent = message;
+            messageElement.style.color = color;
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Form</title>
+</head>
+<body>
+
+<form id="searchForm">
+  <label for="id">ID:</label>
+  <input type="text" id="id" name="id">
+  <label for="brand">Brand:</label>
+  <input type="text" id="brand" name="brand">
+  <button type="submit">Search</button>
+</form>
+
+<div id="dataContainer"></div>
+
+<script>
+document.getElementById('searchForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const id = document.getElementById('id').value;
+    const brand = document.getElementById('brand').value;
+    
+    try {
+        const response = await fetch(`/api/update?id=${id}&brand=${brand}`);
+        const data = await response.json();
+        
+        // Render data
+        const dataContainer = document.getElementById('dataContainer');
+        dataContainer.innerHTML = '';
+        
+        data.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `
+                <p>ID: ${item.id}</p>
+                <p>Brand: ${item.brand}</p>
+                <p>Model: ${item.model}</p>
+                <p>Year: ${item.year}</p>
+                <p>Engine Displacement: ${item.engineDisplacement}</p>
+                <p>Color: ${item.color}</p>
+                <img src="${item.image}" alt="Product Image">
+                <p>Cost: ${item.cost}</p>
+            `;
+            dataContainer.appendChild(itemDiv);
+        });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+});
+</script>
+
+</body>
+</html>
+
